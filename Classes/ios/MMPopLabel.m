@@ -201,11 +201,8 @@ typedef enum : NSUInteger {
 {
     if (self.hidden == NO) return;
 
-    CGPoint center = view.center;
-    if ([[view superview] superview] != self.window) {
-        center = [self.window convertPoint:view.center fromView:view];
-    }
-    self.center = center;
+    self.center = [view.superview convertPoint:view.center toView:[UIApplication sharedApplication].keyWindow.rootViewController.view]; 
+    CGPoint center = self.center;
 
     _arrowType = MMPopLabelTopArrow;
 
